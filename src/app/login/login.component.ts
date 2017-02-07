@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ModelService } from '../service/model-service';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-login',
@@ -17,19 +19,24 @@ export class LoginComponent implements OnInit {
 
   buttonText: string;
 
-  constructor() { }
+  constructor(private modelService: ModelService) { }
 
   ngOnInit() {
     this.buttonText = this.isSignIn ? this.SIGN_IN_TEXT : this.CREATE_ACCOUNT_TEXT;
   }
 
   onSubmit() {
+    const user = new User();
+    user.nickname = this.nickname;
+    user.password = this.password;
+
     if (this.isSignIn) {
-      console.log('signed in');
+      console.log(user.nickname + ' signed in.');
     } else {
-      console.log('account created');
+      console.log(user.nickname + '\'s account created.');
     }
     // TODO sign in
+    this.modelService.setConnectedUser(user);
   }
 
 }
