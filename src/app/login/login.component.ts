@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-login',
@@ -7,12 +7,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  @Input() passedData: string;
+
+  readonly DEFAULT_BUTTON_TEXT = 'Create account';
+
   nickname: string;
   password: string;
+
+  buttonText: string;
 
   constructor() { }
 
   ngOnInit() {
+    this.buttonText = this.passedData !== undefined ? this.passedData : this.DEFAULT_BUTTON_TEXT;
   }
 
   onSubmit() {
