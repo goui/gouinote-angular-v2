@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { NetworkService } from '../service/network-service';
+import { User } from '../model/user';
 
 @Component({
   selector: 'app-main',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
 
-  constructor() { }
+  users: User[];
+
+  constructor(private networkService: NetworkService) { }
 
   ngOnInit() {
+    this.getAllUsers();
+  }
+
+  getAllUsers() {
+    this.networkService.getUserList().subscribe(
+      next => {
+        this.users = next;
+      },
+      error => {
+        alert(JSON.stringify(error));
+      },
+      () => {
+        // TODO
+      }
+    );
   }
 
 }

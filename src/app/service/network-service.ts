@@ -31,4 +31,9 @@ export class NetworkService {
             .map((res: Response) => res.json());
     }
 
+    getUserList(): Observable<User[]> {
+        return this.http.get(this.BASE_URL + 'user/getAllUsers')
+            .map((res: Response) => res.json());
+    }
+
 }
