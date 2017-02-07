@@ -7,16 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  nickname: string;
-  password: string;
-
   constructor() { }
 
   ngOnInit() {
-  }
-
-  onSignInClick() {
-    // TODO sign in
   }
 
 }
