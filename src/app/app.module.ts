@@ -6,6 +6,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
 import { ModelService } from './service/model-service';
+import { NetworkService } from './service/network-service';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -31,7 +32,9 @@ import { MainComponent } from './main/main.component';
       { path: 'main', component: MainComponent }
     ])
   ],
-  providers: [ModelService],
+  providers: [
+    ModelService,
+    NetworkService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
