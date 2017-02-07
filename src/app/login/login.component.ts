@@ -24,7 +24,11 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('logged in!');
+    if (this.isSignIn) {
+      console.log('signed in');
+    } else {
+      console.log('account created');
+    }
     // TODO sign in
   }
 
