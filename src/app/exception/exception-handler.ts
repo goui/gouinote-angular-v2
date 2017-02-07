@@ -11,8 +11,14 @@ export class ExceptionHandler {
     exceptionBody: CustomExceptionBody;
 
     getMessage(error) {
+        let message = '';
         this.exception = JSON.parse(JSON.stringify(error));
-        this.exceptionBody = JSON.parse(this.exception._body);
-        return this.exceptionBody.status + ' - ' + this.exceptionBody.message;
+        if (this.exception._body !== undefined) {
+            message = error;
+        } else {
+            this.exceptionBody = JSON.parse(this.exception._body);
+            message = this.exceptionBody.status + ' - ' + this.exceptionBody.message;
+        }
+        return message;
     }
 }

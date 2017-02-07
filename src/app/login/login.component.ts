@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { ModelService } from '../service/model-service';
+import { NetworkService } from '../service/network-service';
+import { ExceptionHandler } from '../exception/exception-handler';
 import { User } from '../model/user';
 
 @Component({
@@ -13,30 +17,74 @@ export class LoginComponent implements OnInit {
 
   readonly CREATE_ACCOUNT_TEXT = 'Create account';
   readonly SIGN_IN_TEXT = 'Sign in';
+  buttonText: string;
+  submitted = false;
 
+  user = new User();
   nickname: string;
   password: string;
 
-  buttonText: string;
+  exceptionHandler = new ExceptionHandler();
 
-  constructor(private modelService: ModelService) { }
+  constructor(
+    private modelService: ModelService,
+    private networkService: NetworkService,
+    private router: Router) { }
 
   ngOnInit() {
     this.buttonText = this.isSignIn ? this.SIGN_IN_TEXT : this.CREATE_ACCOUNT_TEXT;
   }
 
   onSubmit() {
-    const user = new User();
-    user.nickname = this.nickname;
-    user.password = this.password;
+    this.submitted = true;
+    this.user.nickname = this.nickname;
+    this.user.password = this.password;
 
     if (this.isSignIn) {
-      console.log(user.nickname + ' signed in.');
+      this.signIn();
     } else {
-      console.log(user.nickname + '\'s account created.');
+      this.createAccount();
     }
-    // TODO sign in
-    this.modelService.setConnectedUser(user);
+  }
+
+  signIn() {
+    this.networkService.signIn(this.user.nickname, this.user.password).subscribe(
+      next => {
+        this.user = next;
+      },
+      error => {
+        this.submitted = false;
+        const message = this.exceptionHandler.getMessage(error);
+        console.log(message);
+        alert(message);
+      },
+      () => {
+        this.onCompleted();
+      }
+    );
+  }
+
+  createAccount() {
+    this.networkService.createAccount(this.user).subscribe(
+      next => {
+        this.user = next;
+      },
+      error => {
+        this.submitted = false;
+        const message = this.exceptionHandler.getMessage(error);
+        console.log(message);
+        alert(message);
+      },
+      () => {
+        this.onCompleted();
+      }
+    );
+  }
+
+  onCompleted() {
+    this.submitted = false;
+    this.modelService.setConnectedUser(this.user);
+    this.router.navigateByUrl('/main');
   }
 
 }
