@@ -7,9 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  @Input() passedData: string;
+  @Input() isSignIn: boolean;
 
-  readonly DEFAULT_BUTTON_TEXT = 'Create account';
+  readonly CREATE_ACCOUNT_TEXT = 'Create account';
+  readonly SIGN_IN_TEXT = 'Sign in';
 
   nickname: string;
   password: string;
@@ -19,7 +20,7 @@ export class LoginComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.buttonText = this.passedData !== undefined ? this.passedData : this.DEFAULT_BUTTON_TEXT;
+    this.buttonText = this.isSignIn ? this.SIGN_IN_TEXT : this.CREATE_ACCOUNT_TEXT;
   }
 
   onSubmit() {
