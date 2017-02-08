@@ -1,3 +1,4 @@
+<!-- Main content -->
 <div class="container main-container">
   <ngb-tabset>
     <ngb-tab title="All users">
@@ -13,4 +14,23 @@
     </ngb-tab>
   </ngb-tabset>
 </div>
-<button type="button" class="btn btn-primary btn-circle btn-lg" role="button" placement="top" ngbTooltip="Add a note"><i class="fa fa-plus" aria-hidden="true"></i></button>
+<!-- Modal content -->
+<template ngbModalContainer></template>
+<template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Add a note</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <form class="modal-body">
+    <div class="form-group">
+      <textarea class="form-control" id="exampleTextarea" rows="3" [(ngModel)]="noteContent" name="noteContent" placeholder="Type your note here"></textarea>
+    </div>
+  </form>
+  <div class="modal-footer">
+    <button role="button" type="button" class="btn btn-primary" (click)="c('Close click')">OK</button>
+  </div>
+</template>
+<!-- Add note circular button -->
+<button type="button" class="btn btn-primary btn-circle btn-lg" role="button" placement="top" ngbTooltip="Add a note" (click)="openNoteModal(content)"><i class="fa fa-plus" aria-hidden="true"></i></button>
