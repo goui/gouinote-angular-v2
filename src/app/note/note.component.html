@@ -1,3 +1,8 @@
-<p>
-  note works!
-</p>
+<div class="card-block">
+  <p class="card-text">{{ note.content }}</p>
+</div>
+<div class="card-footer">
+  <small class="text-muted">Added the {{ note.date | date: 'MM/dd' }} at {{ note.date | date: 'hh:mm'}}</small>
+  <small class="text-muted"
+    *ngIf="!isUserDefined"> by <strong>{{ note.nickname }}</strong></small>
+</div>

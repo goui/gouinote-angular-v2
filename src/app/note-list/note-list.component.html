@@ -1,4 +1,3 @@
-<p>
-  note-list works!
-</p>
-<p *ngIf="user !== undefined">{{ user.nickname }}</p>
+<div class="card-columns note-container">
+  <app-note class="card" *ngFor="let note of notes" [note]="note" [isUserDefined]="user !== undefined"></app-note>
+</div>

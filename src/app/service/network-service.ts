@@ -36,4 +36,9 @@ export class NetworkService {
             .map((res: Response) => res.json());
     }
 
+    getNoteList(): Observable<Note[]> {
+        return this.http.get(this.BASE_URL + 'note/getAllNotes')
+            .map((res: Response) => res.json());
+    }
+
 }
