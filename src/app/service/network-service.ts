@@ -23,9 +23,9 @@ export class NetworkService {
             .map((res: Response) => res.json());
     }
 
-    signIn(username, password): Observable<User> {
+    signIn(nickname, password): Observable<User> {
         const data = new URLSearchParams();
-        data.append('nickname', username);
+        data.append('nickname', nickname);
         data.append('password', password);
         return this.http.post(this.BASE_URL + 'user/signIn', data, this.headers)
             .map((res: Response) => res.json());
@@ -38,6 +38,11 @@ export class NetworkService {
 
     getNoteList(): Observable<Note[]> {
         return this.http.get(this.BASE_URL + 'note/getAllNotes')
+            .map((res: Response) => res.json());
+    }
+
+    getUser(nickname): Observable<User> {
+        return this.http.get(this.BASE_URL + 'user/' + nickname)
             .map((res: Response) => res.json());
     }
 

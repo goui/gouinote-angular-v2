@@ -26,7 +26,7 @@ export class MainComponent implements OnInit {
         alert(JSON.stringify(error));
       },
       () => {
-        // TODO
+        // do nothing
       }
     );
   }

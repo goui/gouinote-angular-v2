@@ -12,6 +12,7 @@ export class NoteListComponent implements OnInit {
 
   @Input() user: User;
 
+  distantUser: User;
   notes: Note[];
 
   constructor(private networkService: NetworkService) { }
@@ -19,6 +20,8 @@ export class NoteListComponent implements OnInit {
   ngOnInit() {
     if (this.user === undefined) {
       this.getAllNotes();
+    } else {
+      this.getNotesOfUser();
     }
   }
 
@@ -31,8 +34,21 @@ export class NoteListComponent implements OnInit {
         alert(JSON.stringify(error));
       },
       () => {
-        // TODO
-        console.log(this.notes);
+        // do nothing
+      }
+    );
+  }
+
+  getNotesOfUser() {
+    this.networkService.getUser(this.user.nickname).subscribe(
+      next => {
+        this.distantUser = next;
+      },
+      error => {
+        alert(JSON.stringify(error));
+      },
+      () => {
+        this.notes = this.distantUser.notes;
       }
     );
   }
