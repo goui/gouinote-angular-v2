@@ -1,3 +1,4 @@
 <div class="card-columns note-container">
   <app-note class="card" *ngFor="let note of notes" [note]="note" [isUserDefined]="user !== undefined"></app-note>
 </div>
+<p class="no-notes-p" *ngIf="notes === undefined || notes.length === 0">No notes yet =(</p>

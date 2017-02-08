@@ -17,7 +17,9 @@ export class NoteListComponent implements OnInit {
   constructor(private networkService: NetworkService) { }
 
   ngOnInit() {
-    this.getAllNotes();
+    if (this.user === undefined) {
+      this.getAllNotes();
+    }
   }
 
   getAllNotes() {
