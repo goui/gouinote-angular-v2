@@ -46,4 +46,12 @@ export class NetworkService {
             .map((res: Response) => res.json());
     }
 
+    addNote(username, noteContent): Observable<Boolean> {
+        const note = new Note();
+        note.content = noteContent;
+        note.nickname = username;
+        return this.http.post(this.BASE_URL + 'user/addNote?nickname=' + username, note, this.headers)
+            .map((res: Response) => res.json());
+    }
+
 }
