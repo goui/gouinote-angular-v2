@@ -64,4 +64,8 @@ export class MainComponent implements OnInit {
     );
   }
 
+  onLogOutClick() {
+    localStorage.setItem('nickname', '');
+  }
+
 }

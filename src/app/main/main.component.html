@@ -1,4 +1,4 @@
-<!-- Main content -->
+<!-- Login content -->
 <div class="container main-container">
   <ngb-tabset>
     <ngb-tab title="All users">
@@ -35,3 +35,6 @@
 <!-- Add note circular button -->
 <button *ngIf="connectedNickname !== undefined && connectedNickname.length > 0" type="button" class="btn btn-primary btn-circle btn-lg"
   role="button" placement="top" ngbTooltip="Add a note" (click)="openNoteModal(content)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+  <!-- Log out button -->
+  <button *ngIf="connectedNickname !== undefined && connectedNickname.length > 0" role="button" type="button" class="btn btn-outline-primary log-out-button"
+    (click)="onLogOuClick()" [routerLink]="['/home']" routerLinkActive="active">Log out</button>
