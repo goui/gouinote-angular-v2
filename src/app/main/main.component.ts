@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModelService } from '../service/model-service';
 import { NetworkService } from '../service/network-service';
 import { User } from '../model/user';
 
@@ -13,13 +12,14 @@ export class MainComponent implements OnInit {
 
   users: User[];
   noteContent: string;
+  connectedNickname: string;
 
   constructor(
-    private modelService: ModelService,
     private networkService: NetworkService,
     private modalService: NgbModal) { }
 
   ngOnInit() {
+    this.connectedNickname = localStorage.getItem('nickname');
     this.getAllUsers();
   }
 
@@ -51,7 +51,7 @@ export class MainComponent implements OnInit {
   }
 
   addNote() {
-    this.networkService.addNote(this.modelService.getConnectedUser().nickname, this.noteContent).subscribe(
+    this.networkService.addNote(localStorage.getItem('nickname'), this.noteContent).subscribe(
       next => {
         // do nothing
       },

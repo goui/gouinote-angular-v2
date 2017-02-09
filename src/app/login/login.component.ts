@@ -1,7 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ModelService } from '../service/model-service';
 import { NetworkService } from '../service/network-service';
 import { ExceptionHandler } from '../exception/exception-handler';
 import { User } from '../model/user';
@@ -27,7 +26,6 @@ export class LoginComponent implements OnInit {
   exceptionHandler = new ExceptionHandler();
 
   constructor(
-    private modelService: ModelService,
     private networkService: NetworkService,
     private router: Router) { }
 
@@ -83,7 +81,8 @@ export class LoginComponent implements OnInit {
 
   onCompleted() {
     this.submitted = false;
-    this.modelService.setConnectedUser(this.user);
+    localStorage.setItem('nickname', this.user.nickname);
+    localStorage.setItem('password', this.user.password);
     this.router.navigateByUrl('/main');
   }
 

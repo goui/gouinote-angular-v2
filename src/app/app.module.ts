@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { RouterModule } from '@angular/router';
 
-import { ModelService } from './service/model-service';
 import { NetworkService } from './service/network-service';
 
 import { AppComponent } from './app.component';
@@ -37,7 +36,6 @@ import { NoteListComponent } from './note-list/note-list.component';
     ])
   ],
   providers: [
-    ModelService,
     NetworkService],
   bootstrap: [AppComponent]
 })

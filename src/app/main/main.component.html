@@ -33,4 +33,5 @@
   </div>
 </template>
 <!-- Add note circular button -->
-<button type="button" class="btn btn-primary btn-circle btn-lg" role="button" placement="top" ngbTooltip="Add a note" (click)="openNoteModal(content)"><i class="fa fa-plus" aria-hidden="true"></i></button>
+<button *ngIf="connectedNickname !== undefined && connectedNickname.length > 0" type="button" class="btn btn-primary btn-circle btn-lg"
+  role="button" placement="top" ngbTooltip="Add a note" (click)="openNoteModal(content)"><i class="fa fa-plus" aria-hidden="true"></i></button>
